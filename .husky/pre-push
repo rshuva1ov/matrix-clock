@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 
-npm run lint
-npm run fsd:check
+npx lint-staged
+npx run fsd:check
 

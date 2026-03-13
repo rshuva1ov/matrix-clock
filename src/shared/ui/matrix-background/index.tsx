@@ -1,8 +1,8 @@
 import type React from "react";
 import type { PropsWithChildren } from "react";
 
-import styles from "./index.module.scss";
 import { MatrixRain } from "../matrix-rain";
+import styles from "./index.module.scss";
 
 export const MatrixBackground: React.FC<PropsWithChildren> = ({ children }) => {
   return (

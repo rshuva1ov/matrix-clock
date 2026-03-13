@@ -2,7 +2,7 @@ use chrono::Timelike;
 use chrono_tz::Europe::Moscow;
 use rand::Rng;
 use serde::Serialize;
-use tauri;
+use tauri::{Builder, command as tauri_command};
 
 #[derive(Serialize)]
 pub struct MoscowTime {
@@ -16,8 +16,8 @@ pub struct MatrixRainFrame {
     pub columns: Vec<f32>,
 }
 
-#[tauri::command]
-pub fn get_moscow_time() -> MoscowTime {
+#[tauri_command]
+fn get_moscow_time() -> MoscowTime {
     let now = chrono::Utc::now().with_timezone(&Moscow);
     MoscowTime {
         hours: now.hour() as u8,
@@ -27,8 +27,8 @@ pub fn get_moscow_time() -> MoscowTime {
 }
 
 /// Генерирует один кадр "дождя": для каждой колонки возвращает интенсивность 0..1.
-#[tauri::command]
-pub fn generate_matrix_rain_frame(columns: u16) -> MatrixRainFrame {
+#[tauri_command]
+fn generate_matrix_rain_frame(columns: u16) -> MatrixRainFrame {
     let mut rng = rand::thread_rng();
 
     let safe_columns = columns.clamp(8, 512);
@@ -41,7 +41,7 @@ pub fn generate_matrix_rain_frame(columns: u16) -> MatrixRainFrame {
 }
 
 fn main() {
-    tauri::Builder::default()
+    Builder::default()
         .invoke_handler(tauri::generate_handler![get_moscow_time, generate_matrix_rain_frame])
         .run(tauri::generate_context!())
         .expect("error while running Matrix Clock Tauri application");

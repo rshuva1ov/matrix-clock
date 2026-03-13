@@ -1,6 +1,7 @@
-import { invoke } from "@tauri-apps/api/core";
 import type React from "react";
 import { useEffect, useRef } from "react";
+
+import { invoke } from "@tauri-apps/api/core";
 
 type TMatrixRainFrame = {
   columns: number[];
@@ -45,12 +46,7 @@ export const MatrixRain: React.FC<TMatrixRainProps> = ({ fps = DEFAULT_FPS }) =>
         const x = index * columnWidth;
         const columnHeight = height * intensity;
 
-        const gradient = context.createLinearGradient(
-          x,
-          0,
-          x,
-          columnHeight
-        );
+        const gradient = context.createLinearGradient(x, 0, x, columnHeight);
 
         gradient.addColorStop(0, "rgba(0, 255, 127, 0)");
         gradient.addColorStop(0.2, "rgba(0, 255, 127, 0.4)");
@@ -99,4 +95,3 @@ export const MatrixRain: React.FC<TMatrixRainProps> = ({ fps = DEFAULT_FPS }) =>
 
   return <canvas ref={canvasRef} className="matrix-rain-canvas" />;
 };
-

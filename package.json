@@ -7,7 +7,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "tauri:dev": "tauri dev",
-    "tauri:build": "set CI=false&& tauri build",
+    "tauri:build": "tauri build",
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
     "fsd:check": "steiger",
@@ -46,8 +46,8 @@
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,scss,css,md,json}": [
-      "npm run format",
-      "npm run lint"
+      "pnpm format",
+      "pnpm lint"
     ]
   }
 }
