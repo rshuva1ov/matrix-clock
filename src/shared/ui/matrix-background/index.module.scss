@@ -1,0 +1,35 @@
+.root {
+  position: relative;
+  @include full-screen;
+  background-color: #000;
+  color: #00ff7f;
+}
+
+.overlay {
+  position: relative;
+  @include flex-center;
+  @include full-screen;
+  backdrop-filter: blur(1px);
+}
+
+@keyframes matrix-fall {
+  0% {
+    background-position:
+      0 0,
+      0 0,
+      0 0;
+  }
+  100% {
+    background-position:
+      0 600px,
+      0 200px,
+      0 400px;
+  }
+}
+
+.matrix-rain-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}

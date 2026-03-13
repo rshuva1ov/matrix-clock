@@ -1,0 +1,27 @@
+{
+  "productName": "Matrix Clock",
+  "version": "0.1.0",
+  "identifier": "com.example.matrixclock",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Matrix Clock",
+        "fullscreen": true,
+        "resizable": false,
+        "decorations": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all"
+  }
+}

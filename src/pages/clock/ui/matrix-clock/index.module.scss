@@ -1,0 +1,33 @@
+.matrixClock {
+  display: flex;
+  gap: 0.15em;
+  font-size: min(24vh, 22vw);
+  letter-spacing: 0.08em;
+  color: #00ff9c;
+  @include matrix-glow(#00ff9c);
+}
+
+.digit {
+  position: relative;
+  padding: 0 0.05em;
+  animation: digit-flicker 3s infinite alternate;
+}
+
+@keyframes digit-flicker {
+  0% {
+    opacity: 0.9;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.92;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.95;
+  }
+}
+
