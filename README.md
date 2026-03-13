@@ -7,7 +7,7 @@
 - Tauri 2 (Rust backend)
 - React + TypeScript
 - Vite
-- SCSS-модули, FSD-архитектура, алиасы как в `assessment/frontend`
+- SCSS-модули, FSD-архитектура
 
 ## Запуск
 
@@ -16,4 +16,3 @@ pnpm install # либо npm install / yarn / bun
 pnpm dev     # или npm run dev
 pnpm tauri:dev
 ```
-

@@ -7,7 +7,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "tauri:dev": "tauri dev",
-    "tauri:build": "tauri build",
+    "tauri:build": "set CI=false&& tauri build",
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
     "fsd:check": "steiger",
