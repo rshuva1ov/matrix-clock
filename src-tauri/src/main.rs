@@ -31,7 +31,7 @@ fn get_moscow_time() -> MoscowTime {
 fn generate_matrix_rain_frame(columns: u16) -> MatrixRainFrame {
     let mut rng = rand::thread_rng();
 
-    let safe_columns = columns.clamp(8, 512);
+    let safe_columns = columns.clamp(8, 1024);
 
     let cols = (0..safe_columns)
         .map(|_| rng.gen::<f32>())

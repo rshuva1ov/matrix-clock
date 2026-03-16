@@ -1,9 +1,8 @@
 import type React from "react";
 import { PropsWithChildren, useEffect, useState } from "react";
 
+import { MoscowTimeContext, type TMoscowTime } from "@entities/moscow-time";
 import { invoke } from "@tauri-apps/api/core";
-
-import { MoscowTimeContext, TMoscowTime } from "../../model";
 
 export const MoscowTimeProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [time, setTime] = useState<TMoscowTime>(() => ({

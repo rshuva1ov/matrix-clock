@@ -1,17 +1,22 @@
 import type React from "react";
 import { useEffect, useRef } from "react";
 
-import { invoke } from "@tauri-apps/api/core";
-
-type TMatrixRainFrame = {
-  columns: number[];
-};
+import styles from "./index.module.scss";
 
 type TMatrixRainProps = {
   fps?: number;
 };
 
 const DEFAULT_FPS = 20;
+const FONT_SIZE = 18;
+const FADE_STRENGTH = 0.08;
+
+const CHAR_SET = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЬЭЮЯABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+const pickRandomChar = (): string => {
+  const index = Math.floor(Math.random() * CHAR_SET.length);
+  return CHAR_SET[index] ?? " ";
+};
 
 export const MatrixRain: React.FC<TMatrixRainProps> = ({ fps = DEFAULT_FPS }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -24,9 +29,20 @@ export const MatrixRain: React.FC<TMatrixRainProps> = ({ fps = DEFAULT_FPS }) =>
       return;
     }
 
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    canvas.width = width;
+    canvas.height = height;
+
+    const columnsCount = Math.floor(width / FONT_SIZE);
+    const drops: number[] = Array.from({ length: columnsCount }, () => Math.random() * -20);
+
     const resize = (): void => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
     };
 
     resize();
@@ -35,50 +51,33 @@ export const MatrixRain: React.FC<TMatrixRainProps> = ({ fps = DEFAULT_FPS }) =>
 
     let isActive = true;
 
-    const drawFrame = (frame: TMatrixRainFrame): void => {
-      const { width, height } = canvas;
+    const interval = 1000 / Math.max(fps, 5);
 
-      context.clearRect(0, 0, width, height);
+    const drawFrame = (): void => {
+      context.fillStyle = `rgba(0, 0, 0, ${FADE_STRENGTH})`;
+      context.fillRect(0, 0, width, height);
 
-      const columnWidth = Math.max(width / Math.max(frame.columns.length, 1), 6);
+      context.font = `${FONT_SIZE}px "Fira Code", monospace`;
+      context.textBaseline = "top";
 
-      frame.columns.forEach((intensity, index) => {
-        const x = index * columnWidth;
-        const columnHeight = height * intensity;
+      drops.forEach((dropY, index) => {
+        const x = index * FONT_SIZE;
+        const y = dropY * FONT_SIZE;
 
-        const gradient = context.createLinearGradient(x, 0, x, columnHeight);
+        context.fillStyle = "rgba(0, 255, 127, 0.8)";
+        context.fillText(pickRandomChar(), x, y);
 
-        gradient.addColorStop(0, "rgba(0, 255, 127, 0)");
-        gradient.addColorStop(0.2, "rgba(0, 255, 127, 0.4)");
-        gradient.addColorStop(1, "rgba(0, 255, 127, 0.95)");
-
-        context.fillStyle = gradient;
-        context.fillRect(x, 0, columnWidth, columnHeight);
+        const isAtBottom = y > height && Math.random() > 0.975;
+        drops[index] = isAtBottom ? 0 : dropY + 1;
       });
     };
 
-    const interval = 1000 / Math.max(fps, 5);
-
-    const loop = async (): Promise<void> => {
+    const loop = (): void => {
       if (!isActive) {
         return;
       }
 
-      try {
-        const columns = Math.round(window.innerWidth / 18);
-
-        const frame = await invoke<TMatrixRainFrame>("generate_matrix_rain_frame", {
-          columns
-        });
-
-        if (isActive) {
-          drawFrame(frame);
-        }
-      } catch (error) {
-        // в режиме dev через чистый Vite invoke может быть недоступен — просто пропускаем кадр
-        // eslint-disable-next-line no-console
-        console.debug("MatrixRain frame skipped", error);
-      }
+      drawFrame();
 
       if (isActive) {
         setTimeout(loop, interval);
@@ -93,5 +92,5 @@ export const MatrixRain: React.FC<TMatrixRainProps> = ({ fps = DEFAULT_FPS }) =>
     };
   }, [fps]);
 
-  return <canvas ref={canvasRef} className="matrix-rain-canvas" />;
+  return <canvas ref={canvasRef} className={styles.canvas} />;
 };

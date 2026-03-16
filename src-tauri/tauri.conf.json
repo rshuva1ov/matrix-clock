@@ -11,9 +11,9 @@
     "windows": [
       {
         "title": "Matrix Clock",
-        "fullscreen": true,
-        "resizable": false,
-        "decorations": false
+        "fullscreen": false,
+        "resizable": true,
+        "decorations": true
       }
     ],
     "security": {
@@ -22,6 +22,7 @@
   },
   "bundle": {
     "active": true,
-    "targets": "all"
+    "targets": "all",
+    "icon": ["icons/icon.ico"]
   }
 }

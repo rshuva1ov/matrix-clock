@@ -15,3 +15,43 @@
     0 0 32px rgba($color, 0.7),
     0 0 72px rgba($color, 0.45);
 }
+
+$sm: 360px;
+// Small tablet
+$md: 640px;
+// Large tablet
+$lt: 1024px;
+// Extra large
+$lx: 1240px;
+// Extra extra large
+$xxl: 1440px;
+// Large desktop
+$lg: 1920px;
+
+@mixin respond-from($media) {
+  @if $media == small {
+    @media only screen and (max-width: $sm) {
+      @content;
+    }
+  } @else if $media == medium {
+    @media only screen and (max-width: $md) {
+      @content;
+    }
+  } @else if $media == large {
+    @media only screen and (max-width: $lt) {
+      @content;
+    }
+  } @else if $media == extraLarge {
+    @media only screen and (max-width: $lx) {
+      @content;
+    }
+  } @else if $media == extraExtraLarge {
+    @media only screen and (max-width: $xxl) {
+      @content;
+    }
+  } @else if $media == largeDesktop {
+    @media only screen and (max-width: $lg) {
+      @content;
+    }
+  }
+}
