@@ -1,18 +1,37 @@
-# Matrix Clock
+## Matrix Clock
 
-Полноэкранные матричные часы на Tauri + Rust + React.
+**Matrix Clock** — полноэкранные матричные часы в стилистике «Матрицы», работающие как desktop‑приложение на базе **Tauri 2 (Rust)** и **React + TypeScript**.  
+Проект спроектирован по архитектуре **Feature-Sliced Design** с выделенным `public API` и акцентом на строгую типизацию.
 
-## Технологии
+### Возможности
 
-- Tauri 2 (Rust backend)
-- React + TypeScript
-- Vite
-- SCSS-модули, FSD-архитектура
+- **Анимированный «матричный дождь»** с цифрами текущего времени по Москве
+- **Отдельный Rust‑бэкенд** для получения актуального времени (Moscow TZ) и генерации кадров анимации
+- **FSD‑структура**: разбиение на слои `app / pages / widgets / features / entities / shared`
+- **Современный стек**: Vite, React 18, TypeScript 5, SCSS‑модули
+- Готовность к упаковке в кроссплатформенное desktop‑приложение через Tauri
 
-## Запуск
+### Технологии
+
+- **Tauri 2** (Rust, команды и IPC)
+- **React 18 + TypeScript**
+- **Vite** как сборщик и dev‑сервер
+- **SCSS‑модули** с кастомной генерацией классов
+- **Feature-Sliced Design** (FSD)
+
+### Локальный запуск (dev)
 
 ```bash
-pnpm install # либо npm install / yarn / bun
-pnpm dev     # или npm run dev
-pnpm tauri:dev
+pnpm install           # установка зависимостей
+pnpm tauri:dev         # запуск Tauri + Vite с hot reload
 ```
+
+После этого откроется окно Tauri, которое будет подтягивать фронтенд с Vite‑dev‑сервера и поддерживать hot‑update.
+
+### Продакшн‑сборка
+
+```bash
+pnpm tauri:build
+```
+
+Команда соберёт оптимизированный фронтенд и завернёт его в нативный бинарник Tauri.

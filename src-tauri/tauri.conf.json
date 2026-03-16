@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "identifier": "com.example.matrixclock",
   "build": {
-    "beforeDevCommand": "npm run dev",
-    "beforeBuildCommand": "npm run build",
+    "beforeDevCommand": "pnpm dev",
+    "devUrl": "http://localhost:3000",
+    "beforeBuildCommand": "pnpm build",
     "frontendDist": "../dist"
   },
   "app": {
@@ -23,6 +24,12 @@
   "bundle": {
     "active": true,
     "targets": "all",
-    "icon": ["icons/icon.ico"]
+    "icon": [
+      "icons/32.png",
+      "icons/50.png",
+      "icons/144.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
   }
 }

@@ -11,7 +11,14 @@ const DEFAULT_FPS = 20;
 const FONT_SIZE = 18;
 const FADE_STRENGTH = 0.08;
 
-const CHAR_SET = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЬЭЮЯABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+const CHAR_SET =
+  "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЬЭЮЯ" + // кириллица
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + // латиница
+  "0123456789" + // цифры
+  "你好世界雨电矩阵代码" + // базовый набор китайских иероглифов
+  "あいうえおかきくけこさしすせそなにぬねの" + // японская хирагана
+  "アイウエオカキクケコサシスセソナニヌネノ" + // японская катакана
+  "日月火水木金土"; // японские кандзи (дни недели)
 
 const pickRandomChar = (): string => {
   const index = Math.floor(Math.random() * CHAR_SET.length);

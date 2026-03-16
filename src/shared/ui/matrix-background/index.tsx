@@ -7,7 +7,7 @@ import styles from "./index.module.scss";
 export const MatrixBackground: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <div className={styles.root}>
-      <MatrixRain fps={18} />
+      <MatrixRain fps={50} />
       <div className={styles.overlay}>{children}</div>
     </div>
   );
