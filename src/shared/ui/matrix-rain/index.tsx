@@ -35,14 +35,26 @@ export const MatrixRain: React.FC<TMatrixRainProps> = ({ fps = DEFAULT_FPS }) =>
     canvas.width = width;
     canvas.height = height;
 
-    const columnsCount = Math.floor(width / FONT_SIZE);
-    const drops: number[] = Array.from({ length: columnsCount }, () => Math.random() * -20);
+    let columnsCount = Math.floor(width / FONT_SIZE);
+    let drops: number[] = Array.from({ length: columnsCount }, () => Math.random() * -20);
 
     const resize = (): void => {
       width = window.innerWidth;
       height = window.innerHeight;
       canvas.width = width;
       canvas.height = height;
+
+      const nextColumnsCount = Math.floor(width / FONT_SIZE);
+
+      if (nextColumnsCount !== columnsCount) {
+        const nextDrops: number[] = Array.from(
+          { length: nextColumnsCount },
+          (_, index) => drops[index] ?? Math.random() * -20
+        );
+
+        columnsCount = nextColumnsCount;
+        drops = nextDrops;
+      }
     };
 
     resize();
