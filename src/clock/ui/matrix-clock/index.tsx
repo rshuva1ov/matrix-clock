@@ -1,8 +1,6 @@
 import type React from "react";
 
-import { useMoscowTime } from "@entities/moscow-time";
-
-import { type TClockChar, padTimeUnit } from "../../model";
+import { type TClockChar, padTimeUnit, useMoscowTime } from "../../model";
 import styles from "./index.module.scss";
 
 export const MatrixClock: React.FC = () => {

@@ -10,7 +10,6 @@
     "tauri:build": "tauri build",
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
-    "fsd:check": "steiger",
     "format": "prettier \"**/*.{ts,tsx,js,jsx,scss,css,md,json}\" --write",
     "prepare": "husky"
   },
@@ -39,8 +38,6 @@
     "typescript-eslint": "^8.24.1",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "vite": "^6.0.0",
-    "@feature-sliced/steiger-plugin": "^0.5.5",
-    "steiger": "^0.5.6",
     "husky": "^9.1.7",
     "lint-staged": "^15.4.3"
   },

@@ -1,3 +1,4 @@
+export type TClockChar = string;
 export type TMoscowTime = {
   hours: number;
   minutes: number;

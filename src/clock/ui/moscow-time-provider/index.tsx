@@ -1,8 +1,9 @@
 import type React from "react";
 import { PropsWithChildren, useEffect, useState } from "react";
 
-import { MoscowTimeContext, type TMoscowTime } from "@entities/moscow-time";
 import { invoke } from "@tauri-apps/api/core";
+
+import { MoscowTimeContext, type TMoscowTime } from "../../model";
 
 export const MoscowTimeProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [time, setTime] = useState<TMoscowTime>(() => ({
@@ -34,7 +35,6 @@ export const MoscowTimeProvider: React.FC<PropsWithChildren> = ({ children }) =>
           setTime(fallbackTime);
         }
 
-        // eslint-disable-next-line no-console
         console.debug("Failed to fetch Moscow time via Tauri, using fallback", error);
       }
     };
